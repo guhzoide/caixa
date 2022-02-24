@@ -1,9 +1,7 @@
-#from tkinter.constants import CENTER
 from datetime import date
 import PySimpleGUI as sg
 import shutil
 import telepot
-import os
 
 from PySimpleGUI.PySimpleGUI import Save
 
@@ -11,9 +9,9 @@ def EntradaSaida():
     sg.theme('LightBrown10')
     escolha = [
         [sg.Text('')],
-        [sg.Text('                                                       '), sg.Text('Bem vindo(a) ao', font='Arial 15')],
-        [sg.Text('        '), sg.Image(r"C:\caixa\bds\teste.png")],
-        [sg.Text('                                               '), sg.Text('O que deseja fazer ?', font='Arial 15' ,size=(0,2))],
+        [sg.Text('Bem vindo(a) ao', font='Arial 15')],
+        [sg.Image(r"C:\caixa\bds\teste.png")],
+        [sg.Text('O que deseja fazer ?', font='Arial 15' ,size=(0,2))],
         [sg.Button('Dar entrada', font='Arial 12', size=(15,0)), sg.Button('Dar saida', font='Arial 12', size=(15,0)), sg.Button('Valor atual no caixa', font='Arial 12', size=(15,0)), sg.Button('Sair', font='Arial 12', size=(15,0))]
     ]
 
@@ -33,22 +31,7 @@ def EntradaSaida():
         [sg.Button('Salvar', size=(15,0)), sg.Button('Voltar', size=(15,0))]
     ]
 
-    sg.theme('LightBrown10')
-    suc = [
-        [sg.Text('Ação realizada com sucesso')],
-        [sg.Button('Voltar')]
-    ]
-
-    sg.theme('LightBrown10')
-    sair = [
-        [sg.Text('Deseja fechar o sistema ?', font='Arial 12')],
-        [sg.Button('sim', font='Arial 12', size=(8,0)), sg.Button('não', font='Arial 12', size=(8,0))]
-    ]
-
-    sg.theme('LightBrown10')
-    erro = [[sg.Text('ERRO - Preencha todos os campos')], [sg.Button('Voltar')]]
-
-    janelamain = sg.Window('Escolha', escolha, size=(650,400))
+    janelamain = sg.Window('Menu', escolha, element_justification='c', size=(650,400))
     eventos, valores = janelamain.read()
     if eventos == sg.WINDOW_CLOSED:
         janelamain.close()
@@ -64,18 +47,15 @@ def EntradaSaida():
                     pass
                 last = line
             valor = float(last)
-            finane = 'Entrada'
+            finane = 'Entrada dia:'
             datae = valores['datae']
             entrada = valores['entrada']
             detalhes = valores['detalhes']
 
             if datae == '' and entrada == '' and detalhes == '':
                 janela.close()
-                janela = sg.Window('ERRO', erro)
-                eventos, valores = janela.read()
-                if eventos == 'Voltar':
-                    janela.close()
-                    EntradaSaida()
+                sg.popup_auto_close('ERRO - Preencha todos os campos')
+                EntradaSaida()
             else:       
                 valor1 = float(entrada)
                 total = ('%.2f' %(valor + valor1))
@@ -83,7 +63,10 @@ def EntradaSaida():
                 arq = open(save, 'a')
                 arq.write('\n' + finane + '\n')
                 arq.write(datae + '\n')
-                arq.write(detalhes + '\n')
+                arq.write('Referente a:\n' + detalhes + '\n')
+                arq.write('valor de entrada' + '\n')
+                arq.write(entrada + '\n')
+                arq.write('Restando no caixa\n')
                 arq.write(total + '\n')
                 arq.close()
                 janela.close()
@@ -104,17 +87,15 @@ def EntradaSaida():
                     pass
                 last = line
             valor = float(last)
-            finans = 'Saida'
+            finans = 'Saida dia:'
             datas = valores['datas']
             saida = valores['saida']
             detalhes = valores['detalhes']
 
             if datas == '' and saida == '' and detalhes == '':
                 janela.close()
-                janela = sg.Window('ERRO', erro)
-                eventos, valores = janela.read()
-                if eventos == 'Voltar':
-                    janela.close()
+                sg.popup_auto_close('ERRO - Preencha todos os campos')
+                EntradaSaida()
             else:
                 valor1 = float(saida)
                 resto = ('%.2f' %(valor - valor1))
@@ -122,10 +103,10 @@ def EntradaSaida():
                 arq = open(save, 'a')
                 arq.write('\n' + finans + '\n')
                 arq.write(datas + '\n')
-                arq.write(detalhes + '\n')
+                arq.write('Referente a:\n' + detalhes + '\n')
+                arq.write('valor de saida' + '\n')
                 arq.write(saida + '\n')
-                arq.write('\n')
-                arq.write('Restando\n')
+                arq.write('Restando no caixa\n')
                 arq.write(total + '\n')
                 arq.close()
                 janela.close()
@@ -142,7 +123,7 @@ def EntradaSaida():
         sg.theme('LightBrown10')
         dados = [
             [sg.Multiline(banco, size=(95,35))],
-            [sg.Button('Voltar', size=(15,0)), sg.Button('Esvaziar o caixa', size=(15,0)), sg.Button('Salvar caixa', size=(15,0)), sg.Button('Excuir caixa', size=(15,0)), sg.Button('Enviar caixa', size=(15,0))]
+            [sg.Button('Voltar', size=(15,0)), sg.Button('Salvar caixa', size=(15,0)), sg.Button('Enviar caixa', size=(15,0)), sg.Button('Esvaziar o caixa', size=(15,0)), sg.Button('Recuperar caixa', size=(15,0))]
         ]
         janela = sg.Window('Valor atual no caixa', dados, resizable=True)
         arq.close()
@@ -157,60 +138,59 @@ def EntradaSaida():
             arq.write(zero)
             arq.close()
             janela.close()
-            janela = sg.Window('Sucesso', suc)
-            eventos, valores = janela.read()
-            if eventos == 'Voltar':
-                janela.close()
-                EntradaSaida()
+            sg.popup_auto_close("Acao realizada com sucesso")
+            EntradaSaida()
 
         elif eventos == 'Salvar caixa':
             janela.close()
             file=r'C:\caixa\bds\dados.txt'
-            destino=r'C:\caixa'
-            shutil.copy(file, destino)
-            janela = sg.Window('Sucesso', suc)
-            eventos, valores = janela.read()
-            if eventos == 'Voltar':
-                janela.close()
+            destino = sg.popup_get_folder('Onde deseja salvar o caixa?')
+            if destino == None:
                 EntradaSaida()
-
-        elif eventos == 'Excuir caixa':
-            os.remove('dados.txt')
-            janela.close()
-            janela = sg.Window('Sucesso', suc)
-            eventos, valores = janela.read()
-            if eventos == 'Voltar':
-                janela.close()
+            elif destino == '':
+                sg.popup_auto_close("Selecione um local")
                 EntradaSaida()
-
+            else:
+                shutil.copy(file, destino)
+                sg.popup_auto_close("Acao realizada com sucesso")
+                EntradaSaida()
         
         elif eventos == 'Enviar caixa':
-            from bot import enviacx
             janela.close()
             data = date.today()
             data = str(data)
-            bot = telepot.Bot("5091884786:AAHB5kyw8mevUTgBy3p6ypfGWqItlBKLZ7k")
-            arq = open('dados.txt', 'r')
-            dados = arq.read()
-            bot.sendMessage(-682841708, data)
-            bot.sendMessage(-682841708, dados)
-            janela = sg.Window('Sucesso', suc)
-            eventos, valores = janela.read()
-            if eventos == 'Voltar':
-                janela.close()
+            bot = telepot.Bot("5194360512:AAGLG1EG8MfoMeXnhVyrbx0anCZL5WJ1Ayw")
+            file = sg.popup_get_file('Selecione o arquivo do dados do caixa?')
+            if file == None:
                 EntradaSaida()
+            elif file == '':
+                sg.popup_auto_close("Selecione um local")
+                EntradaSaida()
+            else:
+                arq = open(file, 'r')
+                dados = arq.read()
+                bot.sendMessage(chat_id, data)
+                bot.sendMessage(chat_id, dados)
+                sg.popup_auto_close("Acao realizada com sucesso")
+                EntradaSaida()
+        
+        elif eventos == 'Recuperar caixa':
+            janela.close()
+            file = sg.popup_get_file('Selecione o arquivo do dados do caixa?')
+            destino=r"C:\caixa\bds"
+            shutil.copy(file, destino)
+            sg.popup_auto_close("Acao realizada com sucesso")
+            EntradaSaida()
 
         elif eventos == 'Voltar':
             janela.close()
             EntradaSaida()
 
     elif eventos == 'Sair':
-        janelamain.close()
-        janela = sg.Window('', sair)
-        eventos = janela.read()
-        if eventos == ('sim', {}):
-            janela.close()
-        elif eventos == ('não', {}):
-            janela.close()
+        choose = sg.popup_yes_no('Deseja sair do caixa?')
+        if choose == 'Yes':
+            exit
+        else:
+            janelamain.close()
             EntradaSaida()
 EntradaSaida()
