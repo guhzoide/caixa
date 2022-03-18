@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from caixa import EntradaSaida
 
 def sistema():
     sg.theme('LightBrown10')
@@ -36,7 +37,7 @@ def sistema():
             sg.popup_auto_close('Nome, senha ou cod. de segurança incorretos')
             sistema()
         elif login in banco:
-            from caixa import EntradaSaida
+            EntradaSaida()
             
         else:
             sg.popup_auto_close('Nome, senha ou cod. de segurança incorretos')
