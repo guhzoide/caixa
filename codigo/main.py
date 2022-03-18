@@ -15,13 +15,7 @@ def sistema():
         [sg.Text('Senha'), sg.Input(key='senha', password_char='*')],
         [sg.Text('Codigo de Segurança'), sg.Input(key='codseg', password_char='*', size=(33,1))],
         [sg.Button('salvar'), sg.Button('voltar')]
-    ]
-    
-    sg.theme('LightBrown10')
-    sair = [
-        [sg.Text('Deseja fechar o sistema ?')],
-        [sg.Button('sim', size=(8,0)), sg.Button('não', size=(8,0))]
-    ]    
+    ] 
 
     janela = sg.Window('tela login', login)
 
