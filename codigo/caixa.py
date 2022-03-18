@@ -200,4 +200,3 @@ def EntradaSaida():
         else:
             janelamain.close()
             EntradaSaida()
-EntradaSaida()
