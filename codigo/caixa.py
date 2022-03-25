@@ -3,8 +3,6 @@ import PySimpleGUI as sg
 import shutil
 import telepot
 
-from PySimpleGUI.PySimpleGUI import Save
-
 def EntradaSaida():
     sg.theme('LightBrown10')
     escolha = [
