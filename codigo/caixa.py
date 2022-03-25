@@ -15,7 +15,6 @@ def EntradaSaida():
         [sg.Button('Dar entrada', font='Arial 12', size=(15,0)), sg.Button('Dar saida', font='Arial 12', size=(15,0)), sg.Button('Valor atual no caixa', font='Arial 12', size=(15,0)), sg.Button('Sair', font='Arial 12', size=(15,0))]
     ]
 
-    sg.theme('LightBrown10')
     entrada = [
         [sg.Text('Data de entrada'), sg.Input(key='datae')],
         [sg.Text('Detalhes', size=(12,1)), sg.Input(key='detalhes')],
@@ -23,7 +22,6 @@ def EntradaSaida():
         [sg.Button('Salvar', size=(15,0)), sg.Button('Voltar', size=(15,0))]
     ]
 
-    sg.theme('LightBrown10')
     saida = [
         [sg.Text('Data de saida'), sg.Input(key='datas')],
         [sg.Text('Detalhes', size=(10,1)), sg.Input(key='detalhes')],
@@ -120,7 +118,6 @@ def EntradaSaida():
         save=r'C:\caixa\bds\dados.txt'
         arq = open(save, 'r')
         banco = arq.read()
-        sg.theme('LightBrown10')
         dados = [
             [sg.Multiline(banco, size=(95,35))],
             [sg.Button('Voltar', size=(15,0)), sg.Button('Salvar caixa', size=(15,0)), sg.Button('Enviar caixa', size=(15,0)), sg.Button('Esvaziar o caixa', size=(15,0)), sg.Button('Recuperar caixa', size=(15,0))]
