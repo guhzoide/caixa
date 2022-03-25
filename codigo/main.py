@@ -10,7 +10,6 @@ def sistema():
         [sg.Button('entrar', size=(8,1)), sg.Button('cadastro', size=(8,1)), sg.Button('sair', size=(8,1))]
     ]
 
-    sg.theme('LightBrown10')
     cadastro = [
         [sg.Text('Nome'), sg.Input(key='nome')],
         [sg.Text('Senha'), sg.Input(key='senha', password_char='*')],
