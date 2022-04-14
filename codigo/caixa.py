@@ -155,7 +155,7 @@ def EntradaSaida():
             data = date.today()
             data = str(data)
             bot = telepot.Bot("5194360512:AAGLG1EG8MfoMeXnhVyrbx0anCZL5WJ1Ayw")
-            file = sg.popup_get_file('Selecione o arquivo do dados do caixa?')
+            file = sg.popup_get_file('Selecione o arquivo do dados do caixa')
             if file == None:
                 EntradaSaida()
             elif file == '':
