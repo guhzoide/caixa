@@ -8,7 +8,7 @@ def EntradaSaida():
     escolha = [
         [sg.Text('')],
         [sg.Text('Bem vindo(a) ao', font='Arial 15')],
-        [sg.Image(r"C:\caixa\bds\teste.png")],
+        [sg.Image("bds/teste.png")],
         [sg.Text('O que deseja fazer ?', font='Arial 15' ,size=(0,2))],
         [sg.Button('Dar entrada', font='Arial 12', size=(15,0)), sg.Button('Dar saida', font='Arial 12', size=(15,0)), sg.Button('Valor atual no caixa', font='Arial 12', size=(15,0)), sg.Button('Sair', font='Arial 12', size=(15,0))]
     ]
@@ -37,7 +37,7 @@ def EntradaSaida():
         janela = sg.Window('Dar entrada', entrada)
         eventos, valores = janela.read()
         if eventos == 'Salvar':
-            save=r'C:\caixa\bds\dados.txt'
+            save = 'bds/dados.txt'
             with open(save, 'r') as arq:
                 for line in arq:
                     pass
@@ -77,7 +77,7 @@ def EntradaSaida():
         janela = sg.Window('Dar saida', saida)
         eventos, valores = janela.read()
         if eventos == 'Salvar':
-            save=r'C:\caixa\bds\dados.txt'
+            save = 'bds/dados.txt'
             with open(save, 'r') as arq:
                 for line in arq:
                     pass
@@ -113,7 +113,7 @@ def EntradaSaida():
 
     elif eventos == 'Valor atual no caixa':
         janelamain.close()
-        save=r'C:\caixa\bds\dados.txt'
+        save = 'bds/dados.txt'
         arq = open(save, 'r')
         banco = arq.read()
         dados = [
@@ -124,7 +124,7 @@ def EntradaSaida():
         arq.close()
         eventos, valores = janela.read()
         if eventos == 'Esvaziar o caixa':
-            save=r'C:\caixa\bds\dados.txt'
+            save = 'bds/dados.txt'
             with open(save, "r+") as f:
                 f.truncate(0)
                 f.close()
@@ -138,7 +138,7 @@ def EntradaSaida():
 
         elif eventos == 'Salvar caixa':
             janela.close()
-            file=r'C:\caixa\bds\dados.txt'
+            file = 'bds/dados.txt'
             destino = sg.popup_get_folder('Onde deseja salvar o caixa?')
             if destino == None:
                 EntradaSaida()
@@ -179,7 +179,7 @@ def EntradaSaida():
         elif eventos == 'Recuperar caixa':
             janela.close()
             file = sg.popup_get_file('Selecione o arquivo do dados do caixa?')
-            destino=r"C:\caixa\bds"
+            destino = "bds/"
             shutil.copy(file, destino)
             sg.popup_auto_close("Acao realizada com sucesso")
             EntradaSaida()

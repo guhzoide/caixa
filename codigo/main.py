@@ -29,7 +29,7 @@ def sistema():
         senha = valores['senha']
         codseg = valores['codseg']
         login = nome + "  |  " + senha + "  |  " + codseg
-        cadl=r'C:\caixa\bds\cad.txt'
+        cadl = 'bds/cad.txt'
         arq = open(cadl)
         banco = arq.read()
         if login == "":
@@ -52,7 +52,7 @@ def sistema():
             senha = valores['senha']
             codseg = valores['codseg']
             login = nome +  "  |  " + senha + "  |  " + codseg
-            cadc=r'C:\caixa\bds\cad.txt'
+            cadc = 'bds/cad.txt'
             arq = open(cadc, 'a')
             arq.write(login + '\n')
             arq.close()       
